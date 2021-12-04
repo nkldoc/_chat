@@ -27,9 +27,7 @@
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
       var input = document.getElementById('input');
-	  window.addEventListener('load', (event) => {
-			socket.emit('chat message', 'Connected Date :'+new Date());
-	  });	
+		
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {

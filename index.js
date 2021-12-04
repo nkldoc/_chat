@@ -6,27 +6,21 @@ const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
- 
-/* io.on('connection', (socket) => {  
-  socket.on('chat message', msg => { 
-    io.emit('chat message', msg);
-  });  
-}); */
- 
 
-
-io.on('connection', function(socket){
-    console.log('a user connected: ' + socket.id); 
-	socket.on('disconnect', msg => { 
-		io.emit('chat message', " disconnect ");
-	});
-    socket.on('join', msg => { 
-		io.emit('chat message', "on join");
-	});
+io.on("connection", (socket) => {
+	socket.emit("hello", 1, "2",  "user socket id"+ socket.id);
+  
+ 	socket.on('disconnect', msg => { 
+		io.emit('chat message', " disconnect " + socket.id);
+	}); 
 	socket.on('chat message', msg => { 
 		io.emit('chat message', msg);
-	}); 
+	});  
+	
 });
+ 
+ 
+ 
     
 http.listen(port, () => {
   console.log('Socket.IO server running at http://localhost:'+port+'/');
